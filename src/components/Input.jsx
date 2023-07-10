@@ -19,7 +19,7 @@ function Input() {
 	};
 
 	const handleClick = () => {
-		if (name.trim() === "" && price.trim() === "0") {
+		if (name.trim() === "" && price === "0") {
 			return alert("이름과 가격 모두 입력해주세요.");
 		}
 		alert(`이름:${name}, 가격:${price.replaceAll(",", "")}`);
@@ -31,7 +31,7 @@ function Input() {
 			<StBox>
 				이름 <StInput type='text' id='이름' onChange={handleChange}></StInput>
 				가격 <StInput type='text' id='가격' value={price} onChange={handleChange}></StInput>
-				<StButton type='small' bgColor={"green"} onClick={handleClick}>
+				<StButton type='small' $bgColor={"green"} onClick={handleClick}>
 					저장
 				</StButton>
 			</StBox>

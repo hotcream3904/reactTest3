@@ -1,101 +1,96 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 
 function Select() {
-	const [selectBoxOne, setSelectBoxOne] = useState(false);
-	const [selectBoxTwo, setSelectBoxTwo] = useState(false);
-
-	const toggleSelectBoxOne = () => {
-		setSelectBoxOne(!selectBoxOne);
-	};
-	const toggleSelectBoxTwo = () => {
-		setSelectBoxTwo(!selectBoxTwo);
-	};
+	const [isSelectBoxOneVisible, setIsSelectBoxOneVisible] = useState(false);
+	const [isSelectBoxTwoVisible, setIsSelectBoxTwoVisible] = useState(false);
+	const [firstLanguage, setFirstLanguage] = useState("리액트");
+	const [secondLanguage, setSecondLanguage] = useState("리액트");
 
 	const languageList = ["리액트", "자바", "스프링", "리액트네이티브"];
-	const [fisrtLanguage, setfirstLanguage] = useState("리액트"); //32 번줄 바꿀꺼야 ㅋㅋㅋㅋ
-	const firstLanguageClick = (e) => {
-		setfirstLanguage(e.target.innerHTML);
+
+	const toggleSelectBoxOne = () => {
+		setIsSelectBoxOneVisible(!isSelectBoxOneVisible);
 	};
-	const [secondLanguage, setSecondLanguage] = useState("리액트"); // 50번줄 바꿀꺼야 ㅋㅋㅋㅋ
-	const secondLanguageClick = (e) => {
-		setSecondLanguage(e.target.dataset.value);
+	const toggleSelectBoxTwo = () => {
+		setIsSelectBoxTwoVisible(!isSelectBoxTwoVisible);
+	};
+
+	const handleFirstLanguageClick = (e) => {
+		const firstLanguage = e.target.innerText;
+		setFirstLanguage(firstLanguage);
+	};
+	const handleSecondLanguageClick = (e) => {
+		const secondLanguage = e.target.innerText;
+		setSecondLanguage(secondLanguage);
 	};
 
 	return (
-		<>
-			<Stddd>
-				{selectBoxOne && (
-					<StChoiceBoxParent>
+		<div>
+			<StOptionsVisible>
+				{isSelectBoxOneVisible && (
+					<StSelectBoxParent>
 						{languageList.map((item) => {
 							return (
-								<StChoiceBox key={item} onClick={firstLanguageClick}>
-									{/* onMouseEnter */}
+								<StSelectBoxChild key={item} onClick={handleFirstLanguageClick}>
 									{item}
-								</StChoiceBox>
+								</StSelectBoxChild>
 							);
 						})}
-					</StChoiceBoxParent>
+					</StSelectBoxParent>
 				)}
-			</Stddd>
-			<StSelectBox>
+			</StOptionsVisible>
+			{/* overflow:hidden */}
+			<StSelectBorder>
 				<h1>Select</h1>
-				<StChoiceBoxContainer>
-					<FirstButton>
-						<StSelect onClick={toggleSelectBoxOne}>
-							<p>{fisrtLanguage}</p>
-							<p>▼</p>
-						</StSelect>
-					</FirstButton>
-					<SecondButton>
-						<StSelect onClick={toggleSelectBoxTwo}>
+				<StSelectBtnContainer>
+					<StSelectBtn onClick={toggleSelectBoxOne}>
+						<p>{firstLanguage}</p>
+						<p>▼</p>
+					</StSelectBtn>
+					<StSelectBtnBox>
+						<StSelectBtn onClick={toggleSelectBoxTwo}>
 							<p>{secondLanguage}</p>
 							<p>▼</p>
-						</StSelect>
-						{selectBoxTwo && (
-							<StChoiceBoxParent>
+						</StSelectBtn>
+						{isSelectBoxTwoVisible && (
+							<StSelectBoxParent>
 								{languageList.map((item) => {
 									return (
-										<StChoiceBox key={item} data-value={item} onClick={secondLanguageClick}>
+										<StSelectBoxChild key={item} onClick={handleSecondLanguageClick}>
 											{item}
-										</StChoiceBox>
+										</StSelectBoxChild>
 									);
 								})}
-							</StChoiceBoxParent>
+							</StSelectBoxParent>
 						)}
-					</SecondButton>
-				</StChoiceBoxContainer>
-			</StSelectBox>
-		</>
+					</StSelectBtnBox>
+				</StSelectBtnContainer>
+			</StSelectBorder>
+		</div>
 	);
 }
 
 export default Select;
 
-const StSelectBox = styled.div`
+const StSelectBorder = styled.div`
 	height: 200px;
 	margin: 50px 10px 0 10px;
 	border: 2px solid rgb(196, 193, 193);
 	overflow: hidden;
 `;
 
-const StChoiceBoxContainer = styled.div`
+const StSelectBtnContainer = styled.div`
 	display: flex;
 	gap: 20px;
 `;
 
-const FirstButton = styled.div`
+const StSelectBtnBox = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
 
-const SecondButton = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-const StSelect = styled.button`
+const StSelectBtn = styled.button`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -106,7 +101,7 @@ const StSelect = styled.button`
 	border: 1px solid rgb(196, 193, 193);
 `;
 
-const StChoiceBoxParent = styled.div`
+const StSelectBoxParent = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 300px;
@@ -115,7 +110,7 @@ const StChoiceBoxParent = styled.div`
 	border-radius: 8px;
 `;
 
-const StChoiceBox = styled.button`
+const StSelectBoxChild = styled.button`
 	border: none;
 	height: 40px;
 	border-radius: 8px;
@@ -125,7 +120,7 @@ const StChoiceBox = styled.button`
 	}
 `;
 
-const Stddd = styled.div`
+const StOptionsVisible = styled.div`
 	position: absolute;
 	top: 680px;
 	left: 10px;

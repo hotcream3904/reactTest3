@@ -5,13 +5,14 @@ import { styled } from "styled-components";
 
 function Modal() {
 	const [modalOne, setModalOne] = useState(false);
+	const [modalTwo, setModalTwo] = useState(false);
+
 	const openModalOne = () => {
 		setModalOne(true);
 	};
 	const closeModalOne = () => {
 		setModalOne(false);
 	};
-	const [modalTwo, setModalTwo] = useState(false);
 	const openModalTwo = () => {
 		setModalTwo(true);
 	};
@@ -24,39 +25,39 @@ function Modal() {
 			<h1>Modal</h1>
 			{modalOne && (
 				<>
-					<StModalFather>
+					<StModalsFather>
 						<StModalOneChild>
 							닫기와 확인 버튼 2개가 있고, 외부 영역을 눌러도 모달이 닫히지 않아요.
 							<ButtonBox>
-								<StButton type='small' bgColor={"pink"} onClick={closeModalOne}>
+								<StButton type='small' $bgColor={"pink"} onClick={closeModalOne}>
 									닫기
 								</StButton>
-								<StButton type='small' bgColor={"green"}>
+								<StButton type='small' $bgColor={"green"}>
 									확인
 								</StButton>
 							</ButtonBox>
 						</StModalOneChild>
-					</StModalFather>
+					</StModalsFather>
 				</>
 			)}
 			{modalTwo && (
 				<>
-					<StModalFather onClick={closeModalTwo}>
+					<StModalsFather onClick={closeModalTwo}>
 						<StModalTwoChild onClick={(e) => e.stopPropagation()}>
 							<p>
 								닫기 버튼 1개가 있고,<br></br>외부 영역을 누르면 모달이 닫혀요.
 							</p>
 							<Xbutton onClick={closeModalTwo}>X</Xbutton>
 						</StModalTwoChild>
-					</StModalFather>
+					</StModalsFather>
 				</>
 			)}
 
 			<StBox>
-				<StButton type='small' bgColor={"green"} onClick={openModalOne}>
+				<StButton type='small' $bgColor={"green"} onClick={openModalOne}>
 					open modal
 				</StButton>
-				<StButton type='primary' bgColor={"pink"} onClick={openModalTwo}>
+				<StButton type='primary' $bgColor={"pink"} onClick={openModalTwo}>
 					open modal
 				</StButton>
 			</StBox>
@@ -66,11 +67,11 @@ function Modal() {
 
 export default Modal;
 
-const StModalFather = styled.div`
-	position: fixed;
+const StModalsFather = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;

@@ -6,24 +6,24 @@ function Button() {
 		<div>
 			<h1>Button</h1>
 			<StBox>
-				<StButton onClick={() => alert("버튼을 만들어보세요")} type='primary' bgColor={"green"}>
+				<StButton onClick={() => alert("버튼을 만들어보세요")} type='primary' $bgColor={"green"}>
 					Large Primary Button 📯
 				</StButton>
-				<StButton type='medium' bgColor={"green"}>
+				<StButton type='medium' $bgColor={"green"}>
 					Medium
 				</StButton>
-				<StButton type='small' bgColor={"green"}>
+				<StButton type='small' $bgColor={"green"}>
 					Small
 				</StButton>
 			</StBox>
 			<StBox>
-				<StButton onClick={() => prompt("어렵나요?")} type='primary' bgColor={"pink"}>
+				<StButton onClick={() => prompt("어렵나요?")} type='primary' $bgColor={"pink"}>
 					Large Negative Button 🛎️
 				</StButton>
-				<StButton type='medium' bgColor={"pink"}>
+				<StButton type='medium' $bgColor={"pink"}>
 					Medium
 				</StButton>
-				<StButton type='small' bgColor={"pink"}>
+				<StButton type='small' $bgColor={"pink"}>
 					Small
 				</StButton>
 			</StBox>
@@ -40,9 +40,8 @@ export const StBox = styled.div`
 export const StButton = styled.button`
 	box-sizing: border-box;
 	border: none;
-	padding: 2px 6px;
 	width: 500px;
-	${({ bgColor }) => colorHandler(bgColor)};
+	${({ $bgColor }) => colorHandler($bgColor)};
 	${({ type }) => sizeHandler(type)};
 	&:active {
 		filter: brightness(70%);
